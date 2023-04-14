@@ -1,12 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title> {% block title %} {% endblock %} </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='javascript/main.js') }}"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> 
+    {% block title %} Timezone Tracker {% endblock %} 
+  </title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='javascript/main.js') }}"></script>
 </head>
-    <body>
-        {% block content %} {% endblock %}
-    </body>
+<body>
+  {% block content %} 
+    <div class="container">
+      <!-- Left Column -->
+      <div class="left-column">
+        <ul class="upper-links">
+        </ul>
+        <ul class="lower-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Notifications</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+      </div>
+    
+      <!-- Top Search Field -->
+      <div class="content-container">
+        <div class="search-container">
+          <form action="/search" method="GET">
+            <input type="text" name="search" placeholder="Search a friend" class="search-input">
+            <button type="submit" class="search-button">Search</button>
+          </form>
+        </div>
+    
+        <!-- Friends Table -->
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Friends</th>
+                <th>Location</th>
+                <th>Timezone</th>
+                <th>Available</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rows of data -->
+              <tr>
+                <td>
+                  <img src="path/to/image.jpg" alt="Friend's Picture" class="friend-img">
+                  <span>Friend's Name</span>
+                </td>
+                <td>
+                  <span>City, Country</span>
+                </td>
+                <td>
+                  <span>Current Time</span>
+                  <span>Timezone Name</span>
+                </td>
+                <td>
+                  <span>Availability Status</span>
+                </td>
+              </tr>
+              <!-- More rows? -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+</body>
 </html>
