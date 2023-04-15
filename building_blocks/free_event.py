@@ -18,3 +18,7 @@ event2 = Event('2023-04-12T09:30:00+08:00', '2023-04-12T10:30:00+08:00')
 event3 = Event('2023-04-12T21:30:00+08:00', '2023-04-12T22:00:00+08:00')
 
 free_blocks = [event1, event2, event3]
+
+e1 = free_blocks[0]
+e1.start_datetime
+e1.end_datetime

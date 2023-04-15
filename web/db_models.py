@@ -1,11 +1,14 @@
-from sqlalchemy import Column, Text, Integer, Date, Boolean, ForeignKey, String, DateTime
+from sqlalchemy import SQLAlchemy, Column, Text, Integer, Date, Boolean, ForeignKey, String, DateTime
 from datetime import datetime
-from web import db
 
+#db = SQLAlchemy(app)
+#from web import db
+
+db = SQLAlchemy(app)
 
 class User(db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(50))
     username = db.Column(db.String(50))
     password = db.Column(db.Text)
