@@ -23,8 +23,8 @@
   /* Left Column */
   .left-column {
     width: 15%;
-    background-color: #abb4bd;
-    padding: 10px;
+    background-color: #D39466;
+    padding: 20px;
     border-radius: 4px;
     position: fixed;
     top: 0;
@@ -76,7 +76,7 @@
     border: none;
     border-radius: 20px;
     padding: 0 20px;
-    font-size: 1.1em;
+    font-size: 1em;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
   
@@ -91,17 +91,17 @@
     border: none;
     border-radius: 20px;
     margin-left: 10px;
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #b5c4a4;
+    font-size: 1em;
+    font-weight: normal;
+    color: #333;
+    background-color: #D39466;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
   
   .search-button:hover {
-    background-color: #c4d0b7;
+    background-color: #abb4bd;
   }
   
   table {
@@ -113,12 +113,15 @@
   table th {
     text-align: center;
     padding: 12px 8px;
-    background-color: #c4a4b5;
+    background-color: #212F4D;
+    font-size: 1.2em;
   }
   
   table td {
     padding: 20px 8px;
     vertical-align: top;
+    font-size: 0.9em;
+    background-color: #abb4bd;
   }
   
   table tr:nth-child(even) {
@@ -139,12 +142,12 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9em;
+    font-size: 1em;
     text-align: center;
   }
   
   table thead {
-    background-color: #c4a4b5;
+    background-color: #D39466;
     color: #ffffff;
   }
   
