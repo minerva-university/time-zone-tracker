@@ -26,8 +26,8 @@ class User(db.Model):
 class Friend(db.Model):
     __tablename__ = 'friends'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    friend_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    friend_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
         return f'<Friend {self.id}: user {self.user_id} friend {self.friend_id}>'
@@ -36,8 +36,8 @@ class Friend(db.Model):
 class Interaction(db.Model):
     __tablename__ = 'interactions'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    friend_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    friend_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     last_interaction_date =  db.Column(db.DateTime(timezone=True),index=True)
 
     def __repr__(self):

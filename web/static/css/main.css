@@ -27,7 +27,8 @@ a {
 }
 
 .text-medium {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
     width: 100%;
     margin-left: 5%;
     margin-right: 5%; 
@@ -67,7 +68,7 @@ a {
     height: 130px;
     padding: 10px;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color: #09142D;
     background: #C1CCD7;
@@ -100,3 +101,27 @@ a {
 .o6 {background: #abb4bd; color: #FFFFFF}
 .o7 {background: #abb4bd; color: #FFFFFF}
 
+.content-container {
+    width: 100%;
+    margin-left: 40%;
+    margin-top: 7%;
+    align-items: center;
+  }
+
+.next-day-button {
+    height: 60px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1em;
+    font-weight: normal;
+    color: #333;
+    background-color: #D39466;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+.next-day-button:hover {
+    background-color: #abb4bd;
+}
