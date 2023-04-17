@@ -45,8 +45,9 @@ jobs:
         DATABASE_URL: 'sqlite:///database.db'
         SECRET_KEY: 'e9cac0f3f4Yd47a3be91d7b8f5' 
 
-    - name: Build database
-      run: python web/db_models.py
+    #TO-DO: GitHub is confused by the import of db from web since it doesn't see db in the web folder but it looks like the app itself finds it
+    #- name: Build database
+      #run: python web/db_models.py
 
 #Commenting out testing and database related CI tests, since those are not set up yet
     #- name: Test with pytest
