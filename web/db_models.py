@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Text, Integer, Date, Boolean, ForeignKey, String, DateTime
 from datetime import datetime
-from web import db
+from web.db import db
 
 
 class User(db.Model):
