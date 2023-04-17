@@ -19,9 +19,12 @@ db = SQLAlchemy(app)
 
 #### PLACEHOLDER FOR OVERLAPS PAGE FUNCTIONALITY
 class User_placeholder:
-    def __init__(self, name, hour):
+    def __init__(self, name, hour, location = 'London', timezone = 'GMT+1', status='Available'):
         self.name = name
         self.hour = hour
+        self.location = location
+        self.timezone = timezone
+        self.status = status
 
 
 @app.route('/')
