@@ -47,22 +47,24 @@
             </thead>
             <tbody>
               <!-- Rows of data -->
+              {% for friend in friends %}
               <tr>
                 <td>
-                  <img src="path/to/image.jpg" alt="Friend's Picture" class="friend-img">
-                  <span onclick="location.href='/overlaps';">Friend's Name</span>
+                  <!-- <img src="path/to/image.jpg" alt="Friend's Picture" class="friend-img"> -->
+                  <span onclick="location.href='/overlaps';">{{ friend.name }}</span>
                 </td>
                 <td>
-                  <span>City, Country</span>
+                  <span> {{friend.location}}</span>
                 </td>
                 <td>
-                  <span>Current Time</span>
-                  <span>Timezone Name</span>
+                  <span> {{friend.time}}</span>
+                  <span> {{friend.timezone}}</span>
                 </td>
                 <td>
-                  <span>Availability Status</span>
+                  <span> {{friend.status}}</span>
                 </td>
               </tr>
+              {% endfor %}
               <!-- More rows? -->
             </tbody>
           </table>

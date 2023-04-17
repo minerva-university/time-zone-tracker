@@ -29,13 +29,19 @@ class User_placeholder:
 
 @app.route('/')
 def index():
+    user1 = User_placeholder('Scheffler', 17)
+    user2 = User_placeholder('Sterne', 20, 'Berlin', 'GMT+3', 'Unavailable')
+    user3 = User_placeholder('Malia', 6, 'Sydney', 'GMT+9')
+
+    friends = [user1, user2, user3]
+
     # CHANGE TO TRUE HOME PAGE LATER #
-    return render_template('home.html')
+    return render_template('home.html', friends=friends)
 
 @app.route('/overlaps')
 def overlaps():
     #### PLACEHOLDER DATA TO FEED INTO PAGE ####
-    current_user = User_placeholder('Scheffler', 7)
+    current_user = User_placeholder('You', 7)
     selected_user = User_placeholder('Sterne', 20)
 
     current_users_times = [i for i in range(current_user.hour, 25)] + [i for i in range(1, current_user.hour)]
