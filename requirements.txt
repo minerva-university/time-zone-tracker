@@ -1,5 +1,5 @@
 Flask==2.1.0
-Flask-SQLAlchemy==3.1.1
+Flask-SQLAlchemy==3.0.1
 SQLAlchemy==1.4.26
 
 #Click==7.1.2
