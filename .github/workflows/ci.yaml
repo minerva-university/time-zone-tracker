@@ -46,7 +46,7 @@ jobs:
         SECRET_KEY: 'e9cac0f3f4Yd47a3be91d7b8f5' 
 
     - name: Build database
-      run: python web\db_models.py
+      run: python web/db_models.py
 
 #Commenting out testing and database related CI tests, since those are not set up yet
     #- name: Test with pytest
