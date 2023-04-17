@@ -17,16 +17,20 @@ db = SQLAlchemy(app)
 
 """
 
-
+#### PLACEHOLDER FOR OVERLAPS PAGE FUNCTIONALITY
 class User_placeholder:
     def __init__(self, name, hour):
         self.name = name
         self.hour = hour
 
 
-
 @app.route('/')
 def index():
+    # CHANGE TO TRUE HOME PAGE LATER #
+    return render_template('home.html')
+
+@app.route('/overlaps')
+def overlaps():
     #### PLACEHOLDER DATA TO FEED INTO PAGE ####
     current_user = User_placeholder('Scheffler', 7)
     selected_user = User_placeholder('Sterne', 20)
@@ -37,6 +41,7 @@ def index():
 
     # CHANGE TO TRUE HOME PAGE LATER #
     return render_template('overlaps.html', current_user=current_user, selected_user=selected_user, times=times)
+
 
 @app.route('/users')
 def users():

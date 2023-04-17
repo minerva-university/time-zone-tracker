@@ -58,8 +58,14 @@ All environment variables are stored within the `.env` file and loaded with dote
 Start the server by running:
 
     $ export FLASK_ENV=development
-    $ export FLASK_APP=web
     $ python3 -m flask run
+
+Windows: 
+
+    $ set FLASK_ENV=development
+    $ set FLASK_APP=web
+    $ python3 -m flask run
+
 
 ## Unit Tests
 To run the unit tests use the following commands:
