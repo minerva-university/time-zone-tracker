@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
 from .db_models import *
+import pytz
 
 
 """
@@ -19,24 +20,32 @@ db = SQLAlchemy(app)
 
 #### PLACEHOLDER FOR OVERLAPS PAGE FUNCTIONALITY
 class User_placeholder:
-    def __init__(self, name, hour, location = 'London', timezone = 'GMT+1', status='Available'):
+    def __init__(self, name, hour, location = 'London', timezone = 'UCT'):
         self.name = name
         self.hour = hour
         self.location = location
         self.timezone = timezone
-        self.status = status
 
 
 @app.route('/')
 def index():
     user1 = User_placeholder('Scheffler', 17)
-    user2 = User_placeholder('Sterne', 20, 'Berlin', 'GMT+3', 'Unavailable')
-    user3 = User_placeholder('Malia', 6, 'Sydney', 'GMT+9')
+    user2 = User_placeholder('Sterne', 20, 'Berlin', 'HST')
+    user3 = User_placeholder('Malia', 6, 'Sydney', 'EST')
 
     friends = [user1, user2, user3]
 
+    times = []
+    for user in friends:
+        current_time_utc = datetime.utcnow()
+        convert_time = current_time_utc.astimezone(pytz.timezone(user.timezone))
+        time = '{:d}:{:02d}'.format(convert_time.hour, convert_time.minute)
+        times.append(time)
+
+    friend_times = zip(times, friends)
+
     # CHANGE TO TRUE HOME PAGE LATER #
-    return render_template('home.html', friends=friends)
+    return render_template('home.html', friend_times=friend_times)
 
 @app.route('/overlaps')
 def overlaps():
@@ -51,6 +60,10 @@ def overlaps():
     # CHANGE TO TRUE HOME PAGE LATER #
     return render_template('overlaps.html', current_user=current_user, selected_user=selected_user, times=times)
 
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
 
 @app.route('/users')
 def users():
@@ -58,4 +71,4 @@ def users():
     return render_template('users.html', users=users)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=3000)
