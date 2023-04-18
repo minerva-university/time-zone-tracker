@@ -12,6 +12,6 @@ app.config['DEBUG'] = True
 secret_key = secrets.token_hex(24)
 app.config['SECRET_KEY'] = secret_key
 
-##instantiate database
+#instantiate database
 db = SQLAlchemy(app) 
 from web import serve
