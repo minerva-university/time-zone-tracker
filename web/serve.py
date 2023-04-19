@@ -5,6 +5,7 @@ from datetime import datetime
 import os
 from .db_models import *
 import pytz
+import calendar
 
 
 """
@@ -20,45 +21,63 @@ db = SQLAlchemy(app)
 
 #### PLACEHOLDER FOR OVERLAPS PAGE FUNCTIONALITY
 class User_placeholder:
-    def __init__(self, name, hour, location = 'London', timezone = 'UCT'):
+    def __init__(self, name, location = 'London', timezone = 'UCT'):
         self.name = name
-        self.hour = hour
         self.location = location
         self.timezone = timezone
 
 
 @app.route('/')
 def index():
-    user1 = User_placeholder('Scheffler', 17)
-    user2 = User_placeholder('Sterne', 20, 'Berlin', 'HST')
-    user3 = User_placeholder('Malia', 6, 'Sydney', 'EST')
+    user1 = User_placeholder('Scheffler')
+    user2 = User_placeholder('Sterne', 'Berlin', 'HST')
+    user3 = User_placeholder('Malia', 'Sydney', 'EST')
 
     friends = [user1, user2, user3]
 
+    current_time_utc = datetime.utcnow()
     times = []
     for user in friends:
-        current_time_utc = datetime.utcnow()
         convert_time = current_time_utc.astimezone(pytz.timezone(user.timezone))
         time = '{:d}:{:02d}'.format(convert_time.hour, convert_time.minute)
         times.append(time)
 
     friend_times = zip(times, friends)
 
+    current_user = User_placeholder('Mackenzie Bird', 'London', 'Etc/GMT+1')
+    user_datetime = current_time_utc.astimezone(pytz.timezone(current_user.timezone))
+    user_time = '{:d}:{:02d}'.format(user_datetime.hour, user_datetime.minute)
+    user_day = user_datetime.day
+    user_month = calendar.month_name[user_datetime.month]
+
     # CHANGE TO TRUE HOME PAGE LATER #
-    return render_template('home.html', friend_times=friend_times)
+    return render_template('home.html', friend_times=friend_times, user_day=user_day, current_user=current_user, user_time=user_time, user_month=user_month)
+
+
+
 
 @app.route('/overlaps')
 def overlaps():
-    #### PLACEHOLDER DATA TO FEED INTO PAGE ####
-    current_user = User_placeholder('You', 7)
-    selected_user = User_placeholder('Sterne', 20)
+    current_time_utc = datetime.utcnow()
 
-    current_users_times = [i for i in range(current_user.hour, 25)] + [i for i in range(1, current_user.hour)]
-    selected_user_times = [i for i in range(selected_user.hour, 25)] + [i for i in range(1, selected_user.hour)] 
+    current_user = User_placeholder('You', 'London', 'Etc/GMT+1')
+    current_user_datetime = current_time_utc.astimezone(pytz.timezone(current_user.timezone))
+    current_user_time = '{:d}:{:02d}'.format(current_user_datetime.hour, current_user_datetime.minute)
+    current_user_day = current_user_datetime.day
+    current_user_month = calendar.month_name[current_user_datetime.month]
+
+    selected_user = User_placeholder('Sterne', 'Berlin', 'HST')
+    selected_user_datetime = current_time_utc.astimezone(pytz.timezone(selected_user.timezone))
+    selected_user_time = '{:d}:{:02d}'.format(selected_user_datetime.hour, selected_user_datetime.minute)
+    selected_user_day = selected_user_datetime.day
+    selected_user_month = calendar.month_name[selected_user_datetime.month]
+
+    current_users_times = [i for i in range(current_user_datetime.hour, 25)] + [i for i in range(1, current_user_datetime.hour)]
+    selected_user_times = [i for i in range(selected_user_datetime.hour, 25)] + [i for i in range(1, selected_user_datetime.hour)] 
     times = zip(current_users_times, selected_user_times)
 
     # CHANGE TO TRUE HOME PAGE LATER #
-    return render_template('overlaps.html', current_user=current_user, selected_user=selected_user, times=times)
+    return render_template('overlaps.html', current_user=current_user, selected_user=selected_user, times=times, selected_user_time=selected_user_time, current_user_time=current_user_time, current_user_month=current_user_month, current_user_day=current_user_day, selected_user_month=selected_user_month, selected_user_day=selected_user_day)
 
 @app.route('/settings')
 def settings():

@@ -3,13 +3,37 @@
 {% block css %} <link rel="stylesheet" href="{{ url_for('static', filename='css/home_style.css') }}"> {% endblock %}
 
 {% block content %}  
-<!-- Top Search Field -->
-  <div class="search-container">
-    <form action="/search" method="GET">
-      <input type="text" name="search" placeholder="Search a friend" class="search-input">
-      <button type="submit" class="search-button">Search</button>
-    </form>
+<!-- Top Section of Home Page -->
+  <div class="nav-home">
+
+    <!-- Current user's information -->
+    <div class="profile">
+      <div class="profile-left">
+        <div class="profile-info">
+          <span class="welcome"> Welcome back </span>
+          <span class="profile-name"> {{current_user.name}}</span>
+        </div>
+        <div class="profile-location"> 📍 {{current_user.location}} </div>
+      </div>
+      <div class="profile-right"> 
+        <div class="profile-info">
+          <div class="profile-time"> {{user_time}} </div>
+          <div class="welcome"> {{user_day}}th {{user_month}} </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search friends list -->
+    <div class="search-container">
+      <form action="/search" method="GET">
+        <input type="text" name="search" placeholder="Search a friend" class="search-input">
+        <button type="submit" class="search-button">Search</button>
+      </form>
+    </div>
+
   </div>
+
+  
 
   <!-- Friends Table -->
   {% for time, friend in friend_times %}
@@ -23,6 +47,7 @@
     </div>
   </div>
   {% endfor %}
+
 </div>
 {% endblock %}
 
