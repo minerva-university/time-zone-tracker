@@ -62,6 +62,7 @@ All environment variables are stored within the `.env` file and loaded with dote
 Start the server by running:
 
     $ export FLASK_ENV=development
+    $ export FLASK_APP=web
     $ export FLASK_DEBUG=1
     $ python3 -m flask run
 
