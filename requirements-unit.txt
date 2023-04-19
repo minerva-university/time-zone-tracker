@@ -1,3 +1,4 @@
+#TO-DO: add ONLY applicable dependencies 
 attrs==20.3.0
 Click==7.1.2
 Flask==1.1.2

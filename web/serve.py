@@ -32,7 +32,7 @@ def index():
 
     friends = [user1, user2, user3]
 
-    # CHANGE TO TRUE HOME PAGE LATER #
+    # TO-DO: CHANGE TO TRUE HOME PAGE LATER #
     return render_template('home.html', friends=friends)
 
 @app.route('/overlaps')
@@ -45,7 +45,7 @@ def overlaps():
     selected_user_times = [i for i in range(selected_user.hour, 25)] + [i for i in range(1, selected_user.hour)] 
     times = zip(current_users_times, selected_user_times)
 
-    # CHANGE TO TRUE HOME PAGE LATER #
+    # TO-DO: CHANGE TO TRUE HOME PAGE LATER #
     return render_template('overlaps.html', current_user=current_user, selected_user=selected_user, times=times)
 
 
