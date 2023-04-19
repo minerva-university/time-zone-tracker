@@ -1,7 +1,5 @@
 # Welcome to CS162 Final Project
 
-![template ci](https://github.com/minerva-schools/template-cs162/actions/workflows/ci.yaml/badge.svg)
-
 ## Run Virtual Environment
 
 Virtual environment is a key component in ensuring that the application is configured in the right environment
