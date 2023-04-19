@@ -1,4 +1,4 @@
-from web import db,app
+from web import db, app
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -8,8 +8,6 @@ import pytz
 import calendar
 
 
-"""
-
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
@@ -17,7 +15,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-"""
 
 #### PLACEHOLDER FOR OVERLAPS PAGE FUNCTIONALITY
 class User_placeholder:
@@ -34,6 +31,7 @@ def index():
     user3 = User_placeholder('Malia', 'Sydney', 'EST')
 
     friends = [user1, user2, user3]
+
 
     current_time_utc = datetime.utcnow()
     times = []
@@ -52,8 +50,6 @@ def index():
 
     # CHANGE TO TRUE HOME PAGE LATER #
     return render_template('home.html', friend_times=friend_times, user_day=user_day, current_user=current_user, user_time=user_time, user_month=user_month)
-
-
 
 
 @app.route('/overlaps')
@@ -76,12 +72,12 @@ def overlaps():
     selected_user_times = [i for i in range(selected_user_datetime.hour, 25)] + [i for i in range(1, selected_user_datetime.hour)] 
     times = zip(current_users_times, selected_user_times)
 
-    # CHANGE TO TRUE HOME PAGE LATER #
     return render_template('overlaps.html', current_user=current_user, selected_user=selected_user, times=times, selected_user_time=selected_user_time, current_user_time=current_user_time, current_user_month=current_user_month, current_user_day=current_user_day, selected_user_month=selected_user_month, selected_user_day=selected_user_day)
 
 @app.route('/settings')
 def settings():
     return render_template('settings.html')
+
 
 
 @app.route('/users')
