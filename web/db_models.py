@@ -8,20 +8,25 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50))
     username = db.Column(db.String(50))
-    password = db.Column(db.Text)
-    timezone = db.Column(db.Text)
-    salt = db.Column(String)
+    password = db.Column(db.String(20))
+    timezone = db.Column(db.String(10))
+    location = db.Column(db.String(50)) 
+    status = db.Column(db.String(20))  
+    salt = db.Column(db.String)
     calendar_authenticated = db.Column(db.Boolean, default=False)
-    reminder_frequency = Column(Integer, default=7 * 24 * 60 * 60)
+    reminder_frequency = db.Column(db.Integer, default=7 * 24 * 60 * 60)
     last_reminder_date = db.Column(db.DateTime(timezone=True))
     
     def __repr__(self):
         return (f'<User(id={self.id}, email={self.email}, '
                 f'username={self.username}, password={self.password}, '
                 f'timezone={self.timezone}, salt={self.salt}, '
+                f'location={self.location}), '
+                f'status={self.status}), '
                 f'calendar_authenticated={self.calendar_authenticated}, '
                 f'reminder_frequency={self.reminder_frequency}, '
                 f'last_reminder_date={self.last_reminder_date})>')
+
 
 class Friend(db.Model):
     __tablename__ = 'friends'

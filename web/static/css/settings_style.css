@@ -1,0 +1,85 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  background-color: #f2f4f7;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 50px;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+h1 {
+  color: #abb4bd;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  color: #abb4bd;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+form {
+  margin-bottom: 40px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #abb4bd;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #abb4bd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.button, .google-calendar-button {
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 20px;
+  margin: 0 5px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+  background-color: #212F4D;
+}
+
+.button:hover {
+  background-color: #93a7d1;
+}
+
+.google-calendar-button {
+  background-color: #D39466;
+}
+
+.google-calendar-button:hover {
+  background-color: #ebd0bc;
+}
+

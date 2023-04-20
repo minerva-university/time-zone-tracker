@@ -1,74 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> 
-    {% block title %} Timezone Tracker {% endblock %} 
-  </title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/home_style.css') }}">
-  <script type="text/javascript" src="{{ url_for('static', filename='javascript/main.js') }}"></script>
-</head>
-<body>
-  {% block content %} 
-    <div class="container">
-      <!-- Left Column -->
-      <div class="left-column">
-        <ul class="upper-links">
-        </ul>
-        <ul class="lower-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Notifications</a></li>
-          <li><a href="#">Settings</a></li>
-        </ul>
-      </div>
-    
-      <!-- Top Search Field -->
-      <div class="content-container">
-        <div class="search-container">
-          <form action="/search" method="GET">
-            <input type="text" name="search" placeholder="Search a friend" class="search-input">
-            <button type="submit" class="search-button">Search</button>
-          </form>
+{% extends 'base.html' %}
+{% block title %} TIMELY {% endblock %}
+{% block css %} <link rel="stylesheet" href="{{ url_for('static', filename='css/home_style.css') }}"> {% endblock %}
+
+{% block content %}  
+<!-- Top Section of Home Page -->
+  <div class="nav-home">
+
+    <!-- Current user's information -->
+    <div class="profile">
+      <div class="profile-left">
+        <div class="profile-info">
+          <span class="welcome"> Welcome back </span>
+          <span class="profile-name"> {{current_user.name}}</span>
         </div>
-    
-        <!-- Friends Table -->
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Friend</th>
-                <th>Location</th>
-                <th>Timezone</th>
-                <th>Available</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Rows of data -->
-              <tr>
-                <td>
-                  <img src="path/to/image.jpg" alt="Friend's Picture" class="friend-img">
-                  <span onclick="location.href='/overlaps';">Friend's Name</span>
-                </td>
-                <td>
-                  <span>City, Country</span>
-                </td>
-                <td>
-                  <span>Current Time</span>
-                  <span>Timezone Name</span>
-                </td>
-                <td>
-                  <span>Availability Status</span>
-                </td>
-              </tr>
-              <!-- More rows? -->
-            </tbody>
-          </table>
+        <div class="profile-location"> 📍 {{current_user.location}} </div>
+      </div>
+      <div class="profile-right"> 
+        <div class="profile-info">
+          <div class="profile-time"> {{user_time}} </div>
+          <div class="welcome"> {{user_day}}th {{user_month}} </div>
         </div>
       </div>
     </div>
-  {% endblock %}
-</body>
-</html>
+
+    <!-- Search friends list -->
+    <div class="search-container">
+      <form action="/search" method="GET">
+        <input type="text" name="search" placeholder="Search a friend" class="search-input">
+        <button type="submit" class="search-button">Search</button>
+      </form>
+    </div>
+
+  </div>
+
+  
+
+  <!-- Friends Table -->
+  {% for time, friend in friend_times %}
+  <div class="friend-card", onclick="location.href='/overlaps';">
+    <div class="friend-card-fill">
+      <div class="friend-info">
+        <div class="friend-name"> {{ friend.name }}</div>
+        <div class="friend-location"> 📍 {{ friend.location }} </div>
+      </div>
+      <div class="friend-time"> {{ time }} </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+{% endblock %}
+
