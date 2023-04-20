@@ -96,8 +96,9 @@ u2 = User(primary_only=True,
           time_zone_str='Africa/Cairo',
           window_days=1,
           credentials=c2)
-
+```
 # Find overlapping free time blocks
+```python
 result = find_overlapping_free_blocks(viewer_user=u1, users_list=[u1, u2])
 print(result)
 ```
