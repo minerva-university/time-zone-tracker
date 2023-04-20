@@ -1,56 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> {% block title %} Settings {% endblock %} </title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/settings_style.css') }}">
-</head>
-<body>
-    {% block content %}
-    <div class="container">
-      <h1>Settings</h1>
-  
-      <form class="settings-form">
-        <h2>Personal Information</h2>
-        <label for="timezone">Timezone:</label>
-        <input type="text" id="timezone" name="timezone" required>
-        
-        <label for="city">Current City:</label>
-        <input type="text" id="city" name="city" required>
-        
-        <label for="country">Current Country:</label>
-        <input type="text" id="country" name="country" required>
-  
-        <div class="button-wrapper">
-          <button type="submit" class="button">Update</button>
-        </div>
-      </form>
-  
-      <form class="friend-form">
-        <h2>Add a Friend</h2>
-        <label for="friend-name">Name:</label>
-        <input type="text" id="friend-name" name="friend-name" required>
-        
-        <label for="friend-timezone">Timezone:</label>
-        <input type="text" id="friend-timezone" name="friend-timezone" required>
-        
-        <label for="friend-city">Current City:</label>
-        <input type="text" id="friend-city" name="friend-city" required>
-  
-        <label for="friend-country">Current Country:</label>
-        <input type="text" id="friend-country" name="friend-country" required>
-  
-        <div class="button-wrapper">
-          <button type="submit" class="button">Add Friend</button>
-        </div>
-      </form>
-  
-      <div class="button-wrapper">
-        <button class="google-calendar-button" onclick="window.location.href='https://calendar.google.com'">Google Calendar</button>
-      </div>
+{% extends 'base.html' %}
+{% block title %} TIMELY: Settings {% endblock %}
+{% block css %} <link rel="stylesheet" href="{{ url_for('static', filename='css/settings_style.css') }}"> {% endblock %}
+
+{% block content %} 
+<div class="container">
+    <h1>Settings</h1>
+
+    <form class="settings-form">
+    <h2>Personal Information</h2>
+    <label for="timezone">Timezone:</label>
+    <input type="text" id="timezone" name="timezone" required>
+    
+    <label for="city">Current City:</label>
+    <input type="text" id="city" name="city" required>
+    
+    <label for="country">Current Country:</label>
+    <input type="text" id="country" name="country" required>
+
+    <div class="button-settings-wrapper">
+        <button type="submit" class="button-settings">Update</button>
     </div>
-    {% endblock %}
-  </body>
-  </html>
+    </form>
+
+    <form class="friend-form">
+    <h2>Add a Friend</h2>
+    <label for="friend-name">Name:</label>
+    <input type="text" id="friend-name" name="friend-name" required>
+    
+    <label for="friend-timezone">Timezone:</label>
+    <input type="text" id="friend-timezone" name="friend-timezone" required>
+    
+    <label for="friend-city">Current City:</label>
+    <input type="text" id="friend-city" name="friend-city" required>
+
+    <label for="friend-country">Current Country:</label>
+    <input type="text" id="friend-country" name="friend-country" required>
+
+    <div class="button-settings-wrapper">
+        <button type="submit" class="button-settings">Add Friend</button>
+    </div>
+    </form>
+
+    <div class="button-settings-wrapper">
+    <button class="google-calendar-button" onclick="window.location.href='https://calendar.google.com'">Google Calendar</button>
+    </div>
+</div>
+{% endblock %}
