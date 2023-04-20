@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Text, Integer, Date, Boolean, ForeignKey, String, DateTime
 from datetime import datetime
-from web import db
+from serve import db
 
 
 class User(db.Model):
@@ -45,5 +45,4 @@ class Interaction(db.Model):
                     f'friend_id={self.friend_id}, '
                     f'last_interaction_date={self.last_interaction_date})>')
 
-db.create_all()
-db.session.commit()
+

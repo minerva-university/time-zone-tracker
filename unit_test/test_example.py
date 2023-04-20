@@ -3,10 +3,8 @@
 # and suitably modified.
 import os
 import tempfile
-
 import pytest
-
-from web import app, db
+from web import serve
 
 
 @pytest.fixture
