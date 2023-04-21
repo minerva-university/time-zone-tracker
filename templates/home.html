@@ -33,11 +33,9 @@
 
   </div>
 
-  
-
   <!-- Friends Table -->
   {% for time, friend in friend_times %}
-  <div class="friend-card", onclick="location.href='/overlaps';">
+  <div class="friend-card", onclick="location.href='/overlaps/{{friend.id}}';">
     <div class="friend-card-fill">
       <div class="friend-info">
         <div class="friend-name"> {{ friend.name }}</div>

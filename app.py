@@ -21,46 +21,77 @@ class User_placeholder:
         self.timezone = timezone
 
 
-@app.route('/')
+class Self_placeholder(db.Model):
+    # Task Parameters set automatically: id & date_created
+    id = db.Column(db.Integer, primary_key = True) # unique ids for each self
+    name = db.Column(db.String(200)) 
+    timezone = db.Column(db.String(200))
+    location = db.Column(db.String(200))
+
+    # Defining self representation
+    def __repr__(self):
+        return '<Task %r>' % self.id
+
+
+class User_placeholder(db.Model):
+    # Task Parameters set automatically: id & date_created
+    id = db.Column(db.Integer, primary_key = True) # unique ids for each self
+    name = db.Column(db.String(200)) 
+    timezone = db.Column(db.String(200))
+    location = db.Column(db.String(200))
+
+    # Defining self representation
+    def __repr__(self):
+        return '<Task %r>' % self.id
+
+
+@app.route('/home')
 def index():
-    user1 = User_placeholder('Scheffler')
-    user2 = User_placeholder('Sterne', 'Berlin', 'HST')
-    user3 = User_placeholder('Malia', 'Sydney', 'EST')
+    # Retrieve all friend's information
+    friends = User_placeholder.query.all()
 
-    friends = [user1, user2, user3]
-
-
+    # check current time
     current_time_utc = datetime.utcnow()
+
+    # Calculate time in friends' timezones
     times = []
     for user in friends:
-        convert_time = current_time_utc.astimezone(pytz.timezone(user.timezone))
+        friend_tz = 'Etc/'+user.timezone
+        convert_time = current_time_utc.astimezone(pytz.timezone(friend_tz))
         time = '{:d}:{:02d}'.format(convert_time.hour, convert_time.minute)
         times.append(time)
 
-    friend_times = zip(times, friends)
+    friend_times = zip(times, friends) # all friend's times and their profiles
 
-    current_user = User_placeholder('Mackenzie Bird', 'London', 'Etc/GMT+1')
-    user_datetime = current_time_utc.astimezone(pytz.timezone(current_user.timezone))
+    # Get the most recent update of a current user's information
+    current_user = Self_placeholder.query.order_by(Self_placeholder.id.desc()).first()
+
+    # convert time to reflect current user's 
+    self_tz = 'Etc/'+current_user.timezone
+    user_datetime = current_time_utc.astimezone(pytz.timezone(self_tz))
     user_time = '{:d}:{:02d}'.format(user_datetime.hour, user_datetime.minute)
+    
+    # Retrieve day and month
     user_day = user_datetime.day
     user_month = calendar.month_name[user_datetime.month]
 
-    # CHANGE TO TRUE HOME PAGE LATER #
     return render_template('home.html', friend_times=friend_times, user_day=user_day, current_user=current_user, user_time=user_time, user_month=user_month)
 
 
-@app.route('/overlaps')
-def overlaps():
+@app.route('/overlaps/<int:user_id>')
+def overlaps(user_id):
     current_time_utc = datetime.utcnow()
 
-    current_user = User_placeholder('You', 'London', 'Etc/GMT+1')
-    current_user_datetime = current_time_utc.astimezone(pytz.timezone(current_user.timezone))
+    current_user = Self_placeholder.query.order_by(Self_placeholder.id.desc()).first()
+    self_tz = 'Etc/'+current_user.timezone
+    current_user_datetime = current_time_utc.astimezone(pytz.timezone(self_tz))
     current_user_time = '{:d}:{:02d}'.format(current_user_datetime.hour, current_user_datetime.minute)
     current_user_day = current_user_datetime.day
     current_user_month = calendar.month_name[current_user_datetime.month]
 
-    selected_user = User_placeholder('Sterne', 'Berlin', 'HST')
-    selected_user_datetime = current_time_utc.astimezone(pytz.timezone(selected_user.timezone))
+    selected_user = User_placeholder.query.filter_by(id=user_id).first()
+    selected_tz = 'Etc/'+current_user.timezone
+    selected_user_datetime = current_time_utc.astimezone(pytz.timezone(selected_tz))
     selected_user_time = '{:d}:{:02d}'.format(selected_user_datetime.hour, selected_user_datetime.minute)
     selected_user_day = selected_user_datetime.day
     selected_user_month = calendar.month_name[selected_user_datetime.month]
@@ -71,8 +102,9 @@ def overlaps():
 
     return render_template('overlaps.html', current_user=current_user, selected_user=selected_user, times=times, selected_user_time=selected_user_time, current_user_time=current_user_time, current_user_month=current_user_month, current_user_day=current_user_day, selected_user_month=selected_user_month, selected_user_day=selected_user_day)
 
-@app.route('/settings')
+@app.route('/', methods = ['POST'])
 def settings():
+    
     return render_template('settings.html')
 
 
@@ -81,4 +113,6 @@ def users():
     return render_template('users.html', users=users)
 
 if __name__ == '__main__':
-    app.run()
+    app.app_context().push()
+    db.create_all()
+    app.run(debug=True, port = 5000)
