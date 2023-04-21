@@ -4,6 +4,7 @@ from web import db
 
 
 class User(db.Model):
+    #creating user table to be able to log people in
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50))
@@ -29,6 +30,7 @@ class User(db.Model):
 
 
 class Friend(db.Model):
+    #creating friends table to display overlapping times
     __tablename__ = 'friends'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -39,6 +41,8 @@ class Friend(db.Model):
 
 
 class Interaction(db.Model):
+    #creating interaction tables to query people who talk less 
+    #to display on the top.
     __tablename__ = 'interactions'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
