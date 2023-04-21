@@ -1,74 +1,114 @@
-from flask import current_app, render_template
+import os
+import secrets
+from sqlalchemy import Column, Text, Integer, Date, Boolean, ForeignKey, String, DateTime
 from datetime import datetime
-from db_models import *
-import pytz
-import calendar
+from flask import Flask, render_template
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+# from database import database as db
+# from models import User
+app = Flask(__name__)
+db = SQLAlchemy(app)
 
 
-app = current_app
+# instantiate flask app
+def create_app(config=None):
+    base = os.path.abspath(os.path.dirname(__file__))
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    app.config['DEBUG'] = True
+    secret_key = secrets.token_hex(24)
+    app.config['SECRET_KEY'] = secret_key
+    # db = SQLAlchemy(app)
+
+    if config:
+        app.config.update(config)
+
+    ##instantiate database
+    db.init_app(app)
+    migrate = Migrate(app, db)
+
+    # Add your Flask application code here
+    @app.route('/')
+    def hello():
+        return 'Hello World!'
+
+    return app
 
 #### PLACEHOLDER FOR OVERLAPS PAGE FUNCTIONALITY
-class User_placeholder:
-    def __init__(self, name, location = 'London', timezone = 'UCT'):
-        self.name = name
-        self.location = location
-        self.timezone = timezone
 
 
-@app.route('/')
-def index():
-    user1 = User_placeholder('Scheffler')
-    user2 = User_placeholder('Sterne', 'Berlin', 'HST')
-    user3 = User_placeholder('Malia', 'Sydney', 'EST')
-
-    friends = [user1, user2, user3]
+class UserPlaceHolder(db.Model):
+    __tablename__ = 'user_placeholder'
+    name = db.Column(db.String(50), primary_key=True)
+    hour = db.Column(db.Integer, primary_key=True)
 
 
-    current_time_utc = datetime.utcnow()
-    times = []
-    for user in friends:
-        convert_time = current_time_utc.astimezone(pytz.timezone(user.timezone))
-        time = '{:d}:{:02d}'.format(convert_time.hour, convert_time.minute)
-        times.append(time)
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(50))
+    username = db.Column(db.String(50))
+    password = db.Column(db.Text)
+    timezone = db.Column(db.Text)
+    salt = db.Column(String)
+    calendar_authenticated = db.Column(db.Boolean, default=False)
+    reminder_frequency = Column(Integer, default=7 * 24 * 60 * 60)
+    last_reminder_date = db.Column(db.DateTime(timezone=True))
 
-    friend_times = zip(times, friends)
+    def __repr__(self):
+        return (f'<User(id={self.id}, email={self.email}, '
+                f'username={self.username}, password={self.password}, '
+                f'timezone={self.timezone}, salt={self.salt}, '
+                f'calendar_authenticated={self.calendar_authenticated}, '
+                f'reminder_frequency={self.reminder_frequency}, '
+                f'last_reminder_date={self.last_reminder_date})>')
 
-    current_user = User_placeholder('Mackenzie Bird', 'London', 'Etc/GMT+1')
-    user_datetime = current_time_utc.astimezone(pytz.timezone(current_user.timezone))
-    user_time = '{:d}:{:02d}'.format(user_datetime.hour, user_datetime.minute)
-    user_day = user_datetime.day
-    user_month = calendar.month_name[user_datetime.month]
 
-    # CHANGE TO TRUE HOME PAGE LATER #
-    return render_template('home.html', friend_times=friend_times, user_day=user_day, current_user=current_user, user_time=user_time, user_month=user_month)
+class Friend(db.Model):
+    __tablename__ = 'friends'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    friend_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return f'<Friend {self.id}: user {self.user_id} friend {self.friend_id}>'
+
+
+class Interaction(db.Model):
+    __tablename__ = 'interactions'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    friend_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    last_interaction_date = db.Column(db.DateTime(timezone=True), index=True)
+
+    def __repr__(self):
+        return (f'<Interaction(id={self.id}, user_id={self.user_id}, '
+                f'friend_id={self.friend_id}, '
+                f'last_interaction_date={self.last_interaction_date})>')
+
+
+# @app.route('/')
+# def index():
+#     # CHANGE TO TRUE HOME PAGE LATER #
+#     return render_template('home.html')
 
 
 @app.route('/overlaps')
 def overlaps():
-    current_time_utc = datetime.utcnow()
+    #### PLACEHOLDER DATA TO FEED INTO PAGE ####
+    current_user = User_placeholder('Scheffler', 7)
+    selected_user = User_placeholder('Sterne', 20)
+    db.session.add(current_user)
+    db.session.add(selected_user)
 
-    current_user = User_placeholder('You', 'London', 'Etc/GMT+1')
-    current_user_datetime = current_time_utc.astimezone(pytz.timezone(current_user.timezone))
-    current_user_time = '{:d}:{:02d}'.format(current_user_datetime.hour, current_user_datetime.minute)
-    current_user_day = current_user_datetime.day
-    current_user_month = calendar.month_name[current_user_datetime.month]
-
-    selected_user = User_placeholder('Sterne', 'Berlin', 'HST')
-    selected_user_datetime = current_time_utc.astimezone(pytz.timezone(selected_user.timezone))
-    selected_user_time = '{:d}:{:02d}'.format(selected_user_datetime.hour, selected_user_datetime.minute)
-    selected_user_day = selected_user_datetime.day
-    selected_user_month = calendar.month_name[selected_user_datetime.month]
-
-    current_users_times = [i for i in range(current_user_datetime.hour, 25)] + [i for i in range(1, current_user_datetime.hour)]
-    selected_user_times = [i for i in range(selected_user_datetime.hour, 25)] + [i for i in range(1, selected_user_datetime.hour)] 
+    current_users_times = [i for i in range(current_user.hour, 25)] + [i for i in range(1, current_user.hour)]
+    selected_user_times = [i for i in range(selected_user.hour, 25)] + [i for i in range(1, selected_user.hour)]
     times = zip(current_users_times, selected_user_times)
+    db.session.commit()
 
-    return render_template('overlaps.html', current_user=current_user, selected_user=selected_user, times=times, selected_user_time=selected_user_time, current_user_time=current_user_time, current_user_month=current_user_month, current_user_day=current_user_day, selected_user_month=selected_user_month, selected_user_day=selected_user_day)
-
-@app.route('/settings')
-def settings():
-    return render_template('settings.html')
-
+    # CHANGE TO TRUE HOME PAGE LATER #
+    return render_template('overlaps.html', current_user=current_user, selected_user=selected_user, times=times)
 
 
 @app.route('/users')
@@ -76,5 +116,13 @@ def users():
     users = User.query.all()
     return render_template('users.html', users=users)
 
+
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    with app.app_context():
+        db.create_all()
+    try:
+        app.run(debug=True, port=5000)
+    except SystemExit:
+        pass
+
+
