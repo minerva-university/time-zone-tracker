@@ -60,6 +60,6 @@ class Interaction(db.Model):
         return (f'<Interaction(id={self.id}, user_id={self.user_id}, '
                     f'friend_id={self.friend_id}, '
                     f'last_interaction_date={self.last_interaction_date})>')
-
+#commit to database
 db.create_all()
 db.session.commit()
