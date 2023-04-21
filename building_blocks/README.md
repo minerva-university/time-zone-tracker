@@ -11,6 +11,9 @@ This application allows users to find overlapping free time slots among multiple
 Install the required packages with `pip`:
 pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
+## `User`
+
+A class that represents a user's calendar information, including their credentials, primary calendar, time zone, and the number of days for the free/busy window.
 
 ## Functions
 
@@ -24,9 +27,7 @@ Authenticates a user, asks for Google Calendar permissions, and saves their cred
 
 Reads the JSON file and returns the corresponding content for the given Google ID.
 
-### `User`
 
-A class that represents a user's calendar information, including their credentials, primary calendar, time zone, and the number of days for the free/busy window.
 
 ### `find_overlapping_free_blocks(viewer_user, users_list)`
 
