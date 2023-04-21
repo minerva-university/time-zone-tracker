@@ -1,20 +1,22 @@
-from web import db, app
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
-from .db_models import *
-import pytz
-import calendar
+import secrets
+from db_models import *
 
 
+#instantiate flask app
 app = Flask(__name__)
+base = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(base, 'database.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False   
+app.config['DEBUG'] = True
+secret_key = secrets.token_hex(24)
+app.config['SECRET_KEY'] = secret_key
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-
+##instantiate database
+db = SQLAlchemy(app) 
 
 #### PLACEHOLDER FOR OVERLAPS PAGE FUNCTIONALITY
 class User_placeholder:
@@ -86,4 +88,9 @@ def users():
     return render_template('users.html', users=users)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    with app.app_context():
+        db.create_all()   
+    try:
+        app.run(debug=True, port=5000)  
+    except SystemExit:
+        pass
