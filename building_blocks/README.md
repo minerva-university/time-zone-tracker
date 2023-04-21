@@ -38,7 +38,8 @@ Finds overlapping free time blocks among a list of users.
 1. Authenticate the users using `authenticate_user()` function. This will save the user's credentials in a JSON file with their Google ID.
 
 ```python
-authenticate_user()
+TOKENS_FILE_PATH = "user_tokens.json"
+authenticate_user(TOKENS_FILE_PATH)
 ```
 
 2. Retrieve the user's credentials using their Google ID.
@@ -64,52 +65,3 @@ authenticate_user()
   find_overlapping_free_blocks(viewer_user=u1, users_list=[u1, u2])
   ```
 This function will return a list of overlapping free time blocks among the users.
-
-
-## Example
-
-The following code demonstrates how to authenticate users, retrieve their credentials, create User objects, and find overlapping free time blocks:
-```python
-from free_time_finder import authenticate_user, get_credentials_by_google_id, User, find_overlapping_free_blocks
-
-TOKENS_FILE_PATH = "user_tokens.json"
-```
-
-# Authenticate users and save their credentials
-```python
-authenticate_user()
-```
-
-# Retrieve user credentials
-```python
-c1 = get_credentials_by_google_id("user_key_one_from_json", TOKENS_FILE_PATH)
-c2 = get_credentials_by_google_id("user_key_one_from_json", TOKENS_FILE_PATH)
-```
-
-# Create User objects
-```python
-u1 = User(primary_only=True,
-          time_zone_str='Africa/Cairo',
-          window_days=1,
-          credentials=c1)
-
-u2 = User(primary_only=True,
-          time_zone_str='Africa/Cairo',
-          window_days=1,
-          credentials=c2)
-```
-# Find overlapping free time blocks
-```python
-result = find_overlapping_free_blocks(viewer_user=u1, users_list=[u1, u2])
-print(result)
-```
-
-
-
-
-    
-
-    
-
-
-
