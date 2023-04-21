@@ -79,11 +79,10 @@ def settings():
     return render_template('settings.html')
 
 
-
 @app.route('/users')
 def users():
     users = User.query.all()
     return render_template('users.html', users=users)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    app.run(debug=True)
