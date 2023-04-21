@@ -36,7 +36,7 @@ class User(db.Model):
 
 
 class Friend(db.Model):
-    #creating friends table to display overlapping times
+    #creating friends list to display on home page
     __tablename__ = 'friends'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'),index=True)
@@ -48,7 +48,7 @@ class Friend(db.Model):
 
 class Interaction(db.Model):
     #creating interaction tables to query people who talk less 
-    #to display on the top.
+    #to send people notifications
     __tablename__ = 'interactions'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
