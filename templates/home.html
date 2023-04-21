@@ -11,9 +11,9 @@
       <div class="profile-left">
         <div class="profile-info">
           <span class="welcome"> Welcome back </span>
-          <span class="profile-name"> {{current_user.name}}</span>
+          <span class="profile-name"> {{current_name}}</span>
         </div>
-        <div class="profile-location"> 📍 {{current_user.location}} </div>
+        <div class="profile-location"> 📍 {{current_loc}} </div>
       </div>
       <div class="profile-right"> 
         <div class="profile-info">
@@ -34,12 +34,12 @@
   </div>
 
   <!-- Friends Table -->
-  {% for time, friend in friend_times %}
+  {% for time, name, city in f_times_names_loc %}
   <div class="friend-card", onclick="location.href='/overlaps/{{friend.id}}';">
     <div class="friend-card-fill">
       <div class="friend-info">
-        <div class="friend-name"> {{ friend.name }}</div>
-        <div class="friend-location"> 📍 {{ friend.location }} </div>
+        <div class="friend-name"> {{ name }}</div>
+        <div class="friend-location"> 📍 {{ city }} </div>
       </div>
       <div class="friend-time"> {{ time }} </div>
     </div>
