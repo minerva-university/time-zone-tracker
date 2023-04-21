@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} TIMELY: Friend {% endblock %}
+{% block css %} <link rel="stylesheet" type=text/css href="../static/overlaps_style.css"> {% endblock %}
+
+{% block content %} 
+<div class="board">
+    
+    <!-- Change user names to redirect to their profile -->
+    <div class="text-medium"> {{ current_user.name }}</div> 
+    <div class="text-small"> {{current_user_time}}, {{ current_user_day }}th {{ current_user_month }}</div> 
+    
+
+    <div class="board_item">
+        <div class="timetable">
+            {% for time1, time2 in times %}
+            <div class="column" onclick="location.href='/users';"> 
+                <div class="timeblock t{{ time1 }} o{{ time2 }}"> {{time1}} </div>
+                <div class="timeblock t{{ time2 }} o{{ time1 }}"> {{time2}} </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="text-medium"> {{ selected_user.name }}</div>
+    <div class="text-small"> {{selected_user_time}}, {{ selected_user_day }}th {{ selected_user_month }}</div> 
+
+    <button type="button" class="next-day-button" >CHECK THE NEXT DAY</button>
+</div>
+{% endblock %}

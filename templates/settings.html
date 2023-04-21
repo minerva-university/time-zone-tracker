@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %} TIMELY: Settings {% endblock %}
+{% block css %} <link rel="stylesheet"  type=text/css href="../static/settings_style.css"> {% endblock %}
+
+{% block content %} 
+<div class="container">
+    <h1>Settings</h1>
+
+    <form class="settings-form">
+    <h2>Personal Information</h2>
+    <label for="timezone">Timezone:</label>
+    <input type="text" id="timezone" name="timezone" required>
+    
+    <label for="city">Current City:</label>
+    <input type="text" id="city" name="city" required>
+    
+    <label for="country">Current Country:</label>
+    <input type="text" id="country" name="country" required>
+
+    <div class="button-settings-wrapper">
+        <button type="submit" class="button-settings">Update</button>
+    </div>
+    </form>
+
+    <form class="friend-form">
+    <h2>Add a Friend</h2>
+    <label for="friend-name">Name:</label>
+    <input type="text" id="friend-name" name="friend-name" required>
+    
+    <label for="friend-timezone">Timezone:</label>
+    <input type="text" id="friend-timezone" name="friend-timezone" required>
+    
+    <label for="friend-city">Current City:</label>
+    <input type="text" id="friend-city" name="friend-city" required>
+
+    <label for="friend-country">Current Country:</label>
+    <input type="text" id="friend-country" name="friend-country" required>
+
+    <div class="button-settings-wrapper">
+        <button type="submit" class="button-settings">Add Friend</button>
+    </div>
+    </form>
+
+    <div class="button-settings-wrapper">
+    <button class="google-calendar-button" onclick="window.location.href='https://calendar.google.com'">Google Calendar</button>
+    </div>
+</div>
+{% endblock %}

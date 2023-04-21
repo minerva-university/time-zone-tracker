@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* General styles */
+  body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333;
+    background-color: #f2f4f7;
+  }
+  
+  .container-home {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+  }
+  
+  /* Left Column */
+  .left-column {
+    width: 15%;
+    background-color: #D39466;
+    padding: 20px;
+    border-radius: 4px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+  
+  .left-column ul {
+    list-style-type: none;
+  }
+  
+  .left-column ul.upper-links {
+    height: 6%;
+  }
+  
+  .left-column ul.lower-links {
+    height: 94%;
+  }
+  
+  .left-column li {
+    margin-bottom: 20px;
+  }
+  
+  .left-column a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1em;
+  }
+  
+  .left-column a:hover {
+    color: #ffffff;
+  }
+  
+  /* Top Search Field and Table */
+  .content-container {
+    width: 85%;
+    margin-left: 15%;
+  }
+  
+  .search-container {
+    width: 45%;
+    float: right;
+    padding: 20px 0;
+    flex-direction: row;
+    text-align: right;
+  }
+  
+  .search-input {
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    padding: 0 20px;
+    font-size: 1em;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 80, 179, 0.5);
+  }
+  
+  .search-button {
+    height: 40px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 20px;
+    margin-left: 10px;
+    font-size: 1em;
+    font-weight: normal;
+    color: #333;
+    background-color: #D39466;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-button:hover {
+    background-color: #abb4bd;
+  }
+  
+
+/* MALIA'S ADDITIONS FOR CARDS */
+.friend-card {
+  background: #212F4D;
+  color: #ffffff;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  border: solid;
+  border-radius: 30px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.friend-card:hover {
+  border-width: 6px;
+  border-color: #D39466;
+}
+
+.friend-card-fill {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.friend-info {
+  width: 33.33%;
+  text-align: left; 
+  font-family: 'Roboto', sans-serif;
+}
+
+.friend-name {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.friend-location {
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.friend-time {
+  width: 33.33%;
+  align-self: right;
+  font-weight: bold;
+  text-align: center; 
+  font-family: 'Roboto', sans-serif;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timely {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+/* MALIA'S ADDITIONS FOR PROFILE */
+.nav-home {
+  height: 150px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 3%;
+}
+
+.profile {
+  text-align: left;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
+  justify-content: space-around;
+}
+
+.profile-left {
+  width: 40%;
+}
+
+.profile-info {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 5px;
+}
+
+.profile-name {
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.welcome {
+  font-weight: light;
+  font-size: 26px;
+}
+
+.profile-location {
+  width: 100%;
+  font-weight: lighter;
+  font-size: 16px;
+}
+
+.profile-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45%;
+  text-align: center;
+}
+.profile-time {
+  font-weight: bold;
+  font-size: 55px;
+}
