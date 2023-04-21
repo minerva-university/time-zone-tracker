@@ -1,7 +1,9 @@
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Text, Integer, Date, Boolean, ForeignKey, String, DateTime
 from datetime import datetime
-from web import db
 
+# instantiate the database
+db = SQLAlchemy()
 
 class User(db.Model):
     __tablename__ = 'users'
